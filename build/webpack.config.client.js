@@ -1,7 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 
-module.exports = {
+const isDev = process.env.NODE_ENV === 'development';
+
+const config = {
   entry: {
     app: path.join(__dirname, '../client/app.js')
   },
@@ -31,3 +34,31 @@ module.exports = {
     })
   ]
 };
+
+if (isDev) {
+  config.entry = {
+    app: [
+      "react-hot-loader/patch",
+      config.entry.app
+    ]
+  };
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
+  config.devServer = {
+    host: "0.0.0.0",
+    port: 8000,
+    contentBase: path.join(__dirname, "../dist"),
+    publicPath: "/public/",
+    overlay: {
+      error: true
+    },
+    hot: true,
+    historyApiFallback: {
+      index: "/public/index.html"
+    }
+  }
+}
+
+
+module.exports = config;
