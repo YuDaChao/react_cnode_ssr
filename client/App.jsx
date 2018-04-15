@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default class App extends React.Component {
+import RouteMap from './route'
+
+class App extends React.Component {
   render() {
-    return <div>This is a App</div>
+    return <RouteMap />
   }
 }
+
+export default App
