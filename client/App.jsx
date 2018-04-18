@@ -1,10 +1,11 @@
 import React from 'react'
 
-import RouteMap from './route'
-
 class App extends React.Component {
+  componentDidMount() {
+    // do something here
+  }
   render() {
-    return <RouteMap />
+    return <div>this is a app</div>
   }
 }
 
